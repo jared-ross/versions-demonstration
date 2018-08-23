@@ -8,6 +8,7 @@ function DialogDisplayInner(props) {
 
   return (
     <div className="dialog-item-list">
+      <h2 className="dialog-item-list__header">Notifications</h2>
       {dialogs.map(({ id, content, startTime, timeout }) => (
         <div className="dialog-item" key={id}>
           <div className="dialog-item__content">

@@ -2,24 +2,47 @@ import React from 'react';
 
 import { DialogConsumer } from '../contexts/DialogContext';
 import VersionsTableDisplay from '../components/VersionsTableDisplay';
-import VersionsJSONDisplay from '../components/VersionsJSONDisplay';
+// Unused Alternate Display
+// import VersionsJSONDisplay from '../components/VersionsJSONDisplay';
 
 import api from '../lib/api';
 
 
-const SHORT_DIALOG_TIME = 5000;
+const DIALOG_TIME = 5000;
+const REFRESH_THROTTLE_PERIOD = 5000;
 
 class VersionsPageInner extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { versions: {}, displayType: 'JSON', isLoading: false };
+    this.state = {
+      versions: {},
+      isLoading: false,
+      isRefreshDisabled: false,
+    };
 
-    this.load = this.load.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
   }
 
   componentDidMount() {
     this.load();
+  }
+
+  onRefresh() {
+    // This isn't completely safe, but it will do well here.
+
+    if (this.state.isRefreshDisabled) {
+      return;
+    }
+
+    this.setState({ isRefreshDisabled: true });
+
+    this.load();
+
+    window.setTimeout(
+      () => this.setState({ isRefreshDisabled: false }),
+      REFRESH_THROTTLE_PERIOD,
+    );
   }
 
   async load() {
@@ -29,24 +52,24 @@ class VersionsPageInner extends React.Component {
 
     this.setState({ isLoading: true }, async () => {
       const loadingDialogId = this.props.dialog.addDialog(
-        <span className="loading">Loading...</span>,
-        SHORT_DIALOG_TIME,
+        <span className="loading">Loading version data.</span>,
+        DIALOG_TIME,
       );
 
       try {
-        const data = await api.getVersions();
+        const versions = await api.getVersions();
 
         this.setState(
-          { versions: data.data },
+          { versions },
           () => this.props.dialog.addDialog(
             <span className="success">Successfully loaded version data.</span>,
-            SHORT_DIALOG_TIME,
+            DIALOG_TIME,
           ),
         );
       } catch (e) {
         this.props.dialog.addDialog(
           <span className="error">There was an error loading the version data.</span>,
-          SHORT_DIALOG_TIME,
+          DIALOG_TIME,
         );
       }
 
@@ -58,10 +81,16 @@ class VersionsPageInner extends React.Component {
   render() {
     return (
       <div className="versions-page">
-        <VersionsTableDisplay versions={this.state.versions} />
+
+        <h2 className="versions-page__header">Meercat App: <br /> Server Version Correspondance</h2>
+        <VersionsTableDisplay
+          versions={this.state.versions}
+          isLoading={this.state.isLoading}
+          />
         <button
           className="versions-page__refresh-btn"
-          onClick={this.load}
+          onClick={this.onRefresh}
+          disabled={this.state.isRefreshDisabled}
           >
           Refresh
         </button>

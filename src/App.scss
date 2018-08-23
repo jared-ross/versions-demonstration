@@ -1,0 +1,103 @@
+html, body, #root {
+    height: 100%;
+}
+
+.App {
+    display: flex;
+
+    background: #EEE;
+    color: #333;
+    height: 100%;
+    min-width: 650px;
+}
+
+
+.versions-page {
+    flex: 2.5;
+    padding-left: 4rem;
+}
+
+.versions-page__header {
+    font-size: 1.35rem;
+    margin-bottom: 2.5rem;
+}
+
+.versions-table-display--loading {
+    opacity: .5;
+}
+
+.versions-table-display-table {
+    text-align: left;
+    margin-bottom: 2rem;
+    border-spacing: 0;
+
+    th, td {
+        padding: 0.8rem 2.5rem 0.5rem 0rem;
+    }
+
+    th {
+        border-bottom: 2px solid #AAA;
+    }
+
+    td {
+        border-bottom: 1px solid #AAA;
+    }
+}
+
+.dialog-item-list {
+    flex: 1;
+
+    background: #555;
+    color: #EEE;
+    text-align: center;
+}
+
+.dialog-item-list__header {
+    font-size: 1rem;
+    margin: 0;
+    padding: .5rem 0;
+}
+
+.dialog-item {
+    padding: 1rem;
+    margin: 1rem;
+    background: #666;
+}
+
+.dialog-item__content {
+    font-size: 0.8rem;
+    margin-bottom: .2rem;
+}
+
+.dialog-item__countdown {
+    font-size: .6rem;
+    color: #CCC;
+    margin-bottom: .2rem;
+}
+
+.dialog-item__close {
+    background: none;
+    color: #CCC;
+    border: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.success {
+    color: #5ece6e;
+}
+
+.error {
+    color: #e82d2d;
+}
+
+.modal .dialog-item-list {
+    position: absolute;
+    height: 25rem;
+    width: 25rem;
+    left: 50%;
+    top: 50%;
+    margin-top: -12.5rem;
+    margin-left: -12.5rem;
+    overflow: scroll;
+}
