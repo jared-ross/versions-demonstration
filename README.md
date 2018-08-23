@@ -80,3 +80,12 @@ I just threw the data into a table, but ordered it from newest to oldest.
 * Add in PropTypes, better file structuring, modularised CSS, testing. 
 
 
+## Copyright, Licensing and Warranty
+
+Copyright © 2018 Jared Ross <jared.b.ross@gmail.com>
+All Rights Reserved
+
+Additionally this code is provided under the Mozilla Public License 2.0
+For more information see LICENSE.txt
+
+Use this code at your own risk.
