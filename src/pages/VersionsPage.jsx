@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { DialogConsumer } from '../contexts/DialogContext';
+import VersionsTableDisplay from '../components/VersionsTableDisplay';
 import VersionsJSONDisplay from '../components/VersionsJSONDisplay';
 
 import api from '../lib/api';
@@ -57,7 +58,7 @@ class VersionsPageInner extends React.Component {
   render() {
     return (
       <div className="versions-page">
-        <VersionsJSONDisplay versions={this.state.versions} />
+        <VersionsTableDisplay versions={this.state.versions} />
         <button
           className="versions-page__refresh-btn"
           onClick={this.load}
