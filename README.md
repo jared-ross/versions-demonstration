@@ -9,16 +9,20 @@ It also demonstrates the React Context API.
 
 ## Running it 
 
+### Initial Setup
+
+    $ npm install
+
 ### Production
 
-   $ npm run build-css
-   $ npm run build
+    $ npm run build-css
+    $ npm run build
 
 
 ### Development
 
-   $ npm run watch-css  # Run this in a seperate shell
-   $ npm start
+    $ npm run watch-css  # Run this in a seperate shell
+    $ npm start
 
 
 ## Design Considerations
